@@ -25,7 +25,10 @@ function assessRisk() {
 
   // Validate — all fields must be selected
   const validationMsg = document.getElementById('validation-msg');
-  if (!temperature || !pain || !breathing || !bp || !emergency) {
+  const patientName = document.getElementById('patient-name') ? document.getElementById('patient-name').value.trim() : 'N/A';
+  const patientMobile = document.getElementById('patient-mobile') ? document.getElementById('patient-mobile').value.trim() : 'N/A';
+
+  if (!patientName || !patientMobile || !temperature || !pain || !breathing || !bp || !emergency) {
     validationMsg.style.display = 'block';
     return;
   }
@@ -107,7 +110,8 @@ function assessRisk() {
   document.getElementById('result-level').textContent = result.levelText;
   document.getElementById('result-message').textContent = result.message;
   document.getElementById('result-reason').innerHTML =
-    '<strong>Triggered by:</strong> ' + triggerText;
+    '<strong>Triggered by:</strong> ' + triggerText +
+    '<br><span style="font-size:0.85rem; color: var(--gray-400); margin-top:6px; display:block;">👤 ' + patientName + ' &nbsp;|&nbsp; 📱 ' + patientMobile + '</span>';
 
   const outputSection = document.getElementById('output-section');
   outputSection.style.display = 'block';

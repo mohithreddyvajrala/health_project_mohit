@@ -245,6 +245,35 @@ nav {
 .badge-severe  { background: #fee2e2; color: #b91c1c; }
 .badge-emergency { background: #fee2e2; color: #b91c1c; }
 
+/* ===== Text Inputs ===== */
+.input-group {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+
+.input-label {
+  font-size: 0.88rem;
+  font-weight: 600;
+  color: var(--gray-600);
+}
+
+.text-input {
+  padding: 11px 14px;
+  border: 1.5px solid var(--gray-200);
+  border-radius: var(--radius);
+  font-size: 0.95rem;
+  color: var(--gray-800);
+  outline: none;
+  transition: border-color 0.15s;
+  font-family: inherit;
+}
+
+.text-input:focus {
+  border-color: var(--primary);
+  background: var(--primary-light);
+}
+
 /* ===== Submit Button ===== */
 .btn-submit {
   display: block;

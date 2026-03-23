@@ -34,24 +34,39 @@
     <!-- Form -->
     <form id="health-form" novalidate>
 
+      <!-- Patient Info -->
+      <div class="card">
+        <div class="card-title">👤 Patient Information</div>
+        <div class="form-section">
+          <div class="input-group">
+            <label class="input-label" for="patient-name">👤 Name</label>
+            <input type="text" id="patient-name" name="patient_name" placeholder="Enter patient name" class="text-input" required />
+          </div>
+          <div class="input-group" style="margin-top:14px;">
+            <label class="input-label" for="patient-mobile">📱 Mobile Number</label>
+            <input type="tel" id="patient-mobile" name="patient_mobile" placeholder="Enter mobile number" class="text-input" required />
+          </div>
+        </div>
+      </div>
+
       <!-- Temperature -->
       <div class="card">
-        <div class="card-title">&#127777; Temperature</div>
+        <div class="card-title">🌡️ Q1: Temperature</div>
         <div class="form-section">
           <div class="radio-group">
             <label class="radio-option">
               <input type="radio" name="temperature" value="normal" required />
-              <span class="radio-label">Normal</span>
+              <span class="radio-label">🟢 Normal</span>
               <span class="radio-badge badge-normal">Normal</span>
             </label>
             <label class="radio-option">
               <input type="radio" name="temperature" value="mild_fever" />
-              <span class="radio-label">Mild Fever</span>
+              <span class="radio-label">🟡 Mild Fever</span>
               <span class="radio-badge badge-mild">Mild</span>
             </label>
             <label class="radio-option">
               <input type="radio" name="temperature" value="high_fever" />
-              <span class="radio-label">High Fever</span>
+              <span class="radio-label">🔴 High Fever</span>
               <span class="radio-badge badge-high">High</span>
             </label>
           </div>
@@ -60,27 +75,27 @@
 
       <!-- Pain Level -->
       <div class="card">
-        <div class="card-title">&#128137; Pain Level</div>
+        <div class="card-title">😷 Q2: Pain Level</div>
         <div class="form-section">
           <div class="radio-group">
             <label class="radio-option">
               <input type="radio" name="pain" value="none" required />
-              <span class="radio-label">No Pain</span>
+              <span class="radio-label">🙂 No Pain</span>
               <span class="radio-badge badge-normal">Normal</span>
             </label>
             <label class="radio-option">
               <input type="radio" name="pain" value="mild" />
-              <span class="radio-label">Mild</span>
+              <span class="radio-label">😐 Mild Pain</span>
               <span class="radio-badge badge-mild">Mild</span>
             </label>
             <label class="radio-option">
               <input type="radio" name="pain" value="moderate" />
-              <span class="radio-label">Moderate</span>
+              <span class="radio-label">😣 Moderate Pain</span>
               <span class="radio-badge badge-mild">Moderate</span>
             </label>
             <label class="radio-option">
               <input type="radio" name="pain" value="severe" />
-              <span class="radio-label">Severe</span>
+              <span class="radio-label">😫 Severe Pain</span>
               <span class="radio-badge badge-severe">Severe</span>
             </label>
           </div>
@@ -89,22 +104,22 @@
 
       <!-- Breathing Condition -->
       <div class="card">
-        <div class="card-title">&#129183; Breathing Condition</div>
+        <div class="card-title">🫁 Q3: Breathing Condition</div>
         <div class="form-section">
           <div class="radio-group">
             <label class="radio-option">
               <input type="radio" name="breathing" value="normal" required />
-              <span class="radio-label">Normal</span>
+              <span class="radio-label">😌 Normal</span>
               <span class="radio-badge badge-normal">Normal</span>
             </label>
             <label class="radio-option">
               <input type="radio" name="breathing" value="slight" />
-              <span class="radio-label">Slight Difficulty</span>
+              <span class="radio-label">😮 Slight Difficulty</span>
               <span class="radio-badge badge-mild">Mild</span>
             </label>
             <label class="radio-option">
               <input type="radio" name="breathing" value="severe" />
-              <span class="radio-label">Severe Difficulty</span>
+              <span class="radio-label">😵 Severe Difficulty</span>
               <span class="radio-badge badge-severe">Severe</span>
             </label>
           </div>
@@ -113,22 +128,22 @@
 
       <!-- Blood Pressure -->
       <div class="card">
-        <div class="card-title">&#129657; Blood Pressure</div>
+        <div class="card-title">❤️ Q4: Blood Pressure</div>
         <div class="form-section">
           <div class="radio-group">
             <label class="radio-option">
               <input type="radio" name="bp" value="normal" required />
-              <span class="radio-label">Normal</span>
+              <span class="radio-label">💚 Normal</span>
               <span class="radio-badge badge-normal">Normal</span>
             </label>
             <label class="radio-option">
               <input type="radio" name="bp" value="slightly_elevated" />
-              <span class="radio-label">Slightly Elevated</span>
+              <span class="radio-label">💛 Slightly Elevated</span>
               <span class="radio-badge badge-mild">Mild</span>
             </label>
             <label class="radio-option">
               <input type="radio" name="bp" value="high" />
-              <span class="radio-label">High</span>
+              <span class="radio-label">❤️ High</span>
               <span class="radio-badge badge-high">High</span>
             </label>
           </div>
@@ -137,22 +152,22 @@
 
       <!-- Emergency Indicator -->
       <div class="card">
-        <div class="card-title">&#128680; Emergency Indicator</div>
+        <div class="card-title">🚨 Q5: Emergency Indicator</div>
         <div class="form-section">
           <div class="radio-group">
             <label class="radio-option">
               <input type="radio" name="emergency" value="none" required />
-              <span class="radio-label">None</span>
+              <span class="radio-label">🟢 None</span>
               <span class="radio-badge badge-normal">None</span>
             </label>
             <label class="radio-option">
               <input type="radio" name="emergency" value="chest_pain" />
-              <span class="radio-label">Chest Pain</span>
+              <span class="radio-label">💔 Chest Pain</span>
               <span class="radio-badge badge-emergency">Emergency</span>
             </label>
             <label class="radio-option">
               <input type="radio" name="emergency" value="breathing_difficulty" />
-              <span class="radio-label">Breathing Difficulty (Emergency)</span>
+              <span class="radio-label">🫁 Breathing Difficulty</span>
               <span class="radio-badge badge-emergency">Emergency</span>
             </label>
           </div>
