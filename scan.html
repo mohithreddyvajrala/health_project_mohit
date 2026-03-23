@@ -1,0 +1,410 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Scan Form — HealthMonitor</title>
+  <link rel="stylesheet" href="style.css" />
+  <style>
+    .scan-status {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      padding: 14px 18px;
+      background: var(--primary-light);
+      border: 1.5px solid #bfdbfe;
+      border-radius: var(--radius);
+      margin-top: 20px;
+      font-size: 0.92rem;
+      font-weight: 500;
+      color: var(--primary-dark);
+    }
+
+    .spinner {
+      width: 20px;
+      height: 20px;
+      border: 2.5px solid var(--primary-light);
+      border-top-color: var(--primary);
+      border-radius: 50%;
+      animation: spin 0.75s linear infinite;
+      flex-shrink: 0;
+    }
+
+    @keyframes spin {
+      to { transform: rotate(360deg); }
+    }
+
+    .file-preview {
+      display: none;
+      margin-top: 16px;
+      text-align: center;
+    }
+
+    .file-preview img {
+      max-width: 100%;
+      max-height: 260px;
+      border-radius: var(--radius);
+      border: 1.5px solid var(--gray-200);
+      object-fit: cover;
+    }
+
+    .file-info {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      margin-top: 12px;
+      padding: 8px 16px;
+      background: var(--gray-100);
+      border-radius: 8px;
+      font-size: 0.85rem;
+      color: var(--gray-600);
+    }
+
+    .mock-table {
+      width: 100%;
+      border-collapse: collapse;
+      font-size: 0.9rem;
+      margin-top: 12px;
+    }
+
+    .mock-table td {
+      padding: 9px 12px;
+      border-bottom: 1px solid var(--gray-100);
+    }
+
+    .mock-table td:first-child {
+      font-weight: 600;
+      color: var(--gray-600);
+      width: 50%;
+    }
+
+    .mock-table tr:last-child td {
+      border-bottom: none;
+    }
+
+    .process-step {
+      display: flex;
+      align-items: flex-start;
+      gap: 12px;
+      padding: 10px 0;
+      font-size: 0.88rem;
+      color: var(--gray-600);
+      border-bottom: 1px solid var(--gray-100);
+    }
+
+    .process-step:last-child {
+      border-bottom: none;
+    }
+
+    .step-check {
+      width: 22px;
+      height: 22px;
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 0.75rem;
+      font-weight: 700;
+      flex-shrink: 0;
+      margin-top: 1px;
+    }
+
+    .step-check.done   { background: #dcfce7; color: #15803d; }
+    .step-check.active { background: var(--primary-light); color: var(--primary); animation: pulse 1s ease-in-out infinite; }
+    .step-check.wait   { background: var(--gray-100); color: var(--gray-400); }
+
+    @keyframes pulse {
+      0%, 100% { opacity: 1; }
+      50% { opacity: 0.5; }
+    }
+
+    .btn-scan-submit {
+      display: none;
+      width: 100%;
+      margin-top: 20px;
+      padding: 15px;
+      background: var(--primary);
+      color: white;
+      border: none;
+      border-radius: var(--radius);
+      font-size: 0.95rem;
+      font-weight: 600;
+      cursor: pointer;
+      transition: background 0.15s;
+    }
+
+    .btn-scan-submit:hover { background: var(--primary-dark); }
+
+    .disclaimer-box {
+      background: #fffbeb;
+      border: 1.5px solid #fde68a;
+      border-radius: var(--radius);
+      padding: 14px 18px;
+      font-size: 0.85rem;
+      color: #92400e;
+      display: flex;
+      gap: 10px;
+      align-items: flex-start;
+    }
+  </style>
+</head>
+<body>
+
+  <!-- Navigation -->
+  <nav>
+    <div class="nav-inner">
+      <a href="index.html" class="nav-brand">
+        <div class="brand-icon">&#10010;</div>
+        HealthMonitor
+      </a>
+      <ul class="nav-links">
+        <li><a href="index.html">Home</a></li>
+        <li><a href="form.html">Data Entry</a></li>
+        <li><a href="scan.html" class="active">Scan Form</a></li>
+      </ul>
+    </div>
+  </nav>
+
+  <!-- Page Header -->
+  <div class="page-header">
+    <h1>Paper Form Scan</h1>
+    <p>Upload an image of a filled paper health form. The system will simulate processing and display a sample risk output.</p>
+  </div>
+
+  <div class="container">
+
+    <!-- Disclaimer -->
+    <div class="disclaimer-box mb-2" style="margin-bottom:20px;">
+      <span style="font-size:1.1rem;">&#9888;</span>
+      <span><strong>Demo Mode:</strong> This is a simulated scan. No actual image processing or OCR is performed. The output shown is a sample mock result for demonstration purposes.</span>
+    </div>
+
+    <!-- Upload Card -->
+    <div class="card">
+      <div class="card-title">&#128247; Upload Paper Form Image</div>
+
+      <div class="upload-zone" id="upload-zone" onclick="document.getElementById('file-input').click()">
+        <div class="upload-icon">&#128196;</div>
+        <h3>Click to upload or drag &amp; drop</h3>
+        <p>Supports JPG, PNG, PDF &mdash; max 10 MB</p>
+        <button type="button" class="btn-upload" onclick="event.stopPropagation(); document.getElementById('file-input').click()">
+          &#128193; Choose File
+        </button>
+        <input type="file" id="file-input" accept="image/*,.pdf" />
+      </div>
+
+      <!-- File preview -->
+      <div class="file-preview" id="file-preview">
+        <img id="preview-img" src="" alt="Uploaded form preview" />
+        <div class="file-info">
+          <span>&#128196;</span>
+          <span id="file-name-display"></span>
+        </div>
+      </div>
+
+      <!-- Progress -->
+      <div class="progress-bar-wrap" id="progress-wrap">
+        <div class="progress-bar" id="progress-bar"></div>
+      </div>
+
+      <!-- Status message -->
+      <div class="scan-status" id="scan-status" style="display:none;">
+        <div class="spinner" id="scan-spinner"></div>
+        <span id="scan-status-text">Image received &mdash; processing (simulated)...</span>
+      </div>
+
+      <!-- Submit button (appears after upload) -->
+      <button type="button" class="btn-scan-submit" id="btn-process" onclick="startProcessing()">
+        &#9654; Process Scanned Form
+      </button>
+    </div>
+
+    <!-- Processing steps card (shown during processing) -->
+    <div class="card" id="processing-card" style="display:none;">
+      <div class="card-title">&#9881; Processing Pipeline</div>
+      <div id="process-step-1" class="process-step">
+        <div class="step-check wait" id="check-1">1</div>
+        <div><strong>Image ingestion</strong> &mdash; reading file metadata and verifying format</div>
+      </div>
+      <div id="process-step-2" class="process-step">
+        <div class="step-check wait" id="check-2">2</div>
+        <div><strong>Pre-processing</strong> &mdash; applying contrast normalization and deskew</div>
+      </div>
+      <div id="process-step-3" class="process-step">
+        <div class="step-check wait" id="check-3">3</div>
+        <div><strong>Field detection</strong> &mdash; locating form regions using boundary detection</div>
+      </div>
+      <div id="process-step-4" class="process-step">
+        <div class="step-check wait" id="check-4">4</div>
+        <div><strong>Data extraction</strong> &mdash; reading checkbox states and handwritten values</div>
+      </div>
+      <div id="process-step-5" class="process-step">
+        <div class="step-check wait" id="check-5">5</div>
+        <div><strong>Risk analysis</strong> &mdash; applying clinical rule engine to extracted values</div>
+      </div>
+    </div>
+
+    <!-- Mock Result (shown after processing) -->
+    <div class="scan-mock-result" id="mock-result">
+
+      <!-- Extracted Data -->
+      <div class="card">
+        <div class="card-title">&#128203; Extracted Form Data (Simulated)</div>
+        <table class="mock-table">
+          <tr><td>Temperature</td><td><span class="risk-pill pill-high">High Fever</span></td></tr>
+          <tr><td>Pain Level</td><td><span class="risk-pill pill-moderate">Moderate</span></td></tr>
+          <tr><td>Breathing Condition</td><td><span class="risk-pill pill-low">Normal</span></td></tr>
+          <tr><td>Blood Pressure</td><td><span class="risk-pill pill-high">High</span></td></tr>
+          <tr><td>Emergency Indicator</td><td><span class="risk-pill pill-low">None</span></td></tr>
+        </table>
+      </div>
+
+      <!-- Risk Result -->
+      <div class="card-title" style="font-size:1rem; color: var(--gray-800); margin-bottom:16px; border:none; padding:0;">
+        &#128203; Risk Assessment Result
+      </div>
+      <div class="result-card high">
+        <div class="result-header">
+          <div class="result-icon">&#9888;</div>
+          <div>
+            <div class="result-sublabel">Risk Level</div>
+            <div class="result-level">HIGH RISK</div>
+          </div>
+        </div>
+        <div class="result-message">Medical evaluation recommended</div>
+        <div class="result-reason">
+          <strong>Triggered by:</strong> High Fever + High Blood Pressure + Moderate Pain
+        </div>
+      </div>
+
+      <div class="text-center mt-6">
+        <button onclick="resetScan()" style="background:none; border: 1.5px solid var(--gray-200); padding: 10px 24px; border-radius: 8px; font-size:0.9rem; font-weight:600; color: var(--gray-600); cursor:pointer; margin-right:10px;"
+          onmouseover="this.style.borderColor='var(--primary)'; this.style.color='var(--primary)'"
+          onmouseout="this.style.borderColor='var(--gray-200)'; this.style.color='var(--gray-600)'">
+          &#8635; Scan Another Form
+        </button>
+        <a href="form.html" class="btn-primary" style="font-size:0.9rem; padding: 10px 22px;">&#9998; Use Direct Form Entry</a>
+      </div>
+    </div>
+
+  </div>
+
+  <footer>
+    <p>Hybrid Visual Health Monitoring System &mdash; <span>Academic Prototype</span> &mdash; For demonstration purposes only. Not for clinical use.</p>
+  </footer>
+
+  <script>
+    const fileInput = document.getElementById('file-input');
+    const uploadZone = document.getElementById('upload-zone');
+    const filePreview = document.getElementById('file-preview');
+    const previewImg = document.getElementById('preview-img');
+    const fileNameDisplay = document.getElementById('file-name-display');
+    const progressWrap = document.getElementById('progress-wrap');
+    const progressBar = document.getElementById('progress-bar');
+    const scanStatus = document.getElementById('scan-status');
+    const btnProcess = document.getElementById('btn-process');
+
+    // Drag and drop
+    uploadZone.addEventListener('dragover', (e) => {
+      e.preventDefault();
+      uploadZone.classList.add('drag-over');
+    });
+    uploadZone.addEventListener('dragleave', () => uploadZone.classList.remove('drag-over'));
+    uploadZone.addEventListener('drop', (e) => {
+      e.preventDefault();
+      uploadZone.classList.remove('drag-over');
+      const file = e.dataTransfer.files[0];
+      if (file) handleFile(file);
+    });
+
+    fileInput.addEventListener('change', () => {
+      if (fileInput.files[0]) handleFile(fileInput.files[0]);
+    });
+
+    function handleFile(file) {
+      fileNameDisplay.textContent = file.name + ' (' + (file.size / 1024).toFixed(1) + ' KB)';
+      uploadZone.classList.add('has-file');
+
+      // Show image preview if it's an image
+      if (file.type.startsWith('image/')) {
+        const reader = new FileReader();
+        reader.onload = (e) => {
+          previewImg.src = e.target.result;
+          filePreview.style.display = 'block';
+        };
+        reader.readAsDataURL(file);
+      } else {
+        filePreview.style.display = 'block';
+        previewImg.src = '';
+        previewImg.style.display = 'none';
+      }
+
+      // Simulate upload progress
+      progressWrap.style.display = 'block';
+      let pct = 0;
+      const interval = setInterval(() => {
+        pct += Math.random() * 18 + 8;
+        if (pct >= 100) { pct = 100; clearInterval(interval); }
+        progressBar.style.width = pct + '%';
+      }, 120);
+
+      setTimeout(() => {
+        scanStatus.style.display = 'flex';
+        document.getElementById('scan-spinner').style.display = 'block';
+        document.getElementById('scan-status-text').textContent = 'Image received \u2014 processing (simulated)\u2026';
+        btnProcess.style.display = 'block';
+      }, 1400);
+    }
+
+    function startProcessing() {
+      btnProcess.style.display = 'none';
+      document.getElementById('processing-card').style.display = 'block';
+      document.getElementById('scan-status-text').textContent = 'Running analysis pipeline\u2026';
+
+      const steps = ['check-1','check-2','check-3','check-4','check-5'];
+      let i = 0;
+
+      function activateStep() {
+        if (i > 0) {
+          document.getElementById(steps[i-1]).className = 'step-check done';
+          document.getElementById(steps[i-1]).textContent = '\u2713';
+        }
+        if (i < steps.length) {
+          document.getElementById(steps[i]).className = 'step-check active';
+          document.getElementById(steps[i]).textContent = (i+1);
+          i++;
+          setTimeout(activateStep, 700);
+        } else {
+          // All done
+          scanStatus.style.display = 'none';
+          document.getElementById('processing-card').style.display = 'none';
+          document.getElementById('mock-result').style.display = 'block';
+          window.scrollTo({ top: document.getElementById('mock-result').offsetTop - 80, behavior: 'smooth' });
+        }
+      }
+      activateStep();
+    }
+
+    function resetScan() {
+      fileInput.value = '';
+      filePreview.style.display = 'none';
+      previewImg.src = '';
+      previewImg.style.display = 'block';
+      progressWrap.style.display = 'none';
+      progressBar.style.width = '0%';
+      scanStatus.style.display = 'none';
+      btnProcess.style.display = 'none';
+      uploadZone.classList.remove('has-file');
+      document.getElementById('processing-card').style.display = 'none';
+      document.getElementById('mock-result').style.display = 'none';
+      ['check-1','check-2','check-3','check-4','check-5'].forEach((id, idx) => {
+        const el = document.getElementById(id);
+        el.className = 'step-check wait';
+        el.textContent = (idx + 1);
+      });
+      window.scrollTo({ top: 0, behavior: 'smooth' });
+    }
+  </script>
+
+</body>
+</html>

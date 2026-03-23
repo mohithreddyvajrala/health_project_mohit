@@ -1,0 +1,260 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="794" height="1050" viewBox="0 0 794 1050">
+  <defs>
+    <style>
+      .title    { font: bold 17px 'Times New Roman', serif; fill: #fff; }
+      .hosp     { font: bold 16px 'Times New Roman', serif; fill: #1a3a5c; }
+      .hospsub  { font: 10px 'Times New Roman', serif; fill: #555; }
+      .sec      { font: bold 11px Arial, sans-serif; fill: #1a3a5c; text-transform: uppercase; }
+      .opt      { font: 11px 'Times New Roman', serif; fill: #222; }
+      .hand     { font: italic 13px Georgia, serif; fill: #1a1a8a; }
+      .flabel   { font: 9px Arial, sans-serif; fill: #666; text-transform: uppercase; letter-spacing: 0.5px; }
+      .fid      { font: bold 14px 'Courier New', monospace; fill: #1a3a5c; }
+      .note     { font: italic 11px Georgia, serif; fill: #1a1a8a; }
+      .footer   { font: 8px Arial, sans-serif; fill: #888; }
+      .instr    { font: italic 9px 'Times New Roman', serif; fill: #555; }
+      .sev-n    { font: bold 8px Arial, sans-serif; fill: #166534; }
+      .sev-m    { font: bold 8px Arial, sans-serif; fill: #854d0e; }
+      .sev-h    { font: bold 8px Arial, sans-serif; fill: #991b1b; }
+      .stamp    { font: bold 8px Arial, sans-serif; fill: #c0392b; }
+      .sig      { font: italic 16px Georgia, serif; fill: #1a1a8a; }
+      .siglabel { font: 9px Arial, sans-serif; fill: #666; text-transform: uppercase; }
+    </style>
+  </defs>
+
+  <!-- Page background -->
+  <rect width="794" height="1050" fill="#fff" rx="4"/>
+
+  <!-- Top border accent -->
+  <rect x="0" y="0" width="794" height="6" fill="#1a3a5c"/>
+
+  <!-- ── HEADER ── -->
+  <!-- Hospital name area -->
+  <text x="50" y="55" class="hosp">✚ City General Hospital</text>
+  <text x="50" y="70" class="hospsub">Department of Emergency &amp; Outpatient Services</text>
+  <text x="50" y="83" class="hospsub">123 Medical Drive, New Delhi — 110001  |  Ph: +91-11-2345-6789</text>
+
+  <!-- Form ID box -->
+  <rect x="600" y="32" width="144" height="60" fill="none" stroke="#1a3a5c" stroke-width="1.5" rx="3"/>
+  <text x="672" y="50" text-anchor="middle" class="hospsub">FORM NO.</text>
+  <text x="672" y="66" text-anchor="middle" class="fid">HM-2024</text>
+  <text x="672" y="83" text-anchor="middle" class="hospsub">Date: 21/03/2026</text>
+
+  <!-- Divider -->
+  <line x1="40" y1="100" x2="754" y2="100" stroke="#1a3a5c" stroke-width="2.5"/>
+
+  <!-- Form title banner -->
+  <rect x="40" y="110" width="714" height="30" fill="#1a3a5c" rx="2"/>
+  <text x="397" y="131" text-anchor="middle" class="title" letter-spacing="1">PATIENT HEALTH ASSESSMENT FORM</text>
+
+  <!-- ── PATIENT DETAILS ── -->
+  <!-- Row 1 -->
+  <text x="50"  y="165" class="flabel">Patient Name</text>
+  <line x1="50"  y1="180" x2="300" y2="180" stroke="#333" stroke-width="1.2"/>
+  <text x="52"  y="178" class="hand">Rahul Sharma</text>
+
+  <text x="320" y="165" class="flabel">Age / Gender</text>
+  <line x1="320" y1="180" x2="490" y2="180" stroke="#333" stroke-width="1.2"/>
+  <text x="322" y="178" class="hand">34 / Male</text>
+
+  <text x="510" y="165" class="flabel">Patient ID</text>
+  <line x1="510" y1="180" x2="754" y2="180" stroke="#333" stroke-width="1.2"/>
+  <text x="512" y="178" class="hand">PT-00847</text>
+
+  <!-- Row 2 -->
+  <text x="50"  y="205" class="flabel">Date of Visit</text>
+  <line x1="50"  y1="220" x2="270" y2="220" stroke="#333" stroke-width="1.2"/>
+  <text x="52"  y="218" class="hand">21-03-2026</text>
+
+  <text x="290" y="205" class="flabel">Attending Staff</text>
+  <line x1="290" y1="220" x2="540" y2="220" stroke="#333" stroke-width="1.2"/>
+  <text x="292" y="218" class="hand">Dr. Priya Nair</text>
+
+  <text x="560" y="205" class="flabel">Ward / OPD</text>
+  <line x1="560" y1="220" x2="754" y2="220" stroke="#333" stroke-width="1.2"/>
+  <text x="562" y="218" class="hand">OPD-3</text>
+
+  <!-- Instructions -->
+  <text x="50" y="244" class="instr">Instructions: Mark the applicable box with an X for each parameter. Select only ONE option per section.</text>
+
+  <!-- ─────────────────────────────────────────── -->
+  <!-- SECTION 1: TEMPERATURE -->
+  <!-- ─────────────────────────────────────────── -->
+  <rect x="40" y="255" width="714" height="78" fill="none" stroke="#bbb" stroke-width="1.5" rx="3"/>
+  <rect x="40" y="255" width="714" height="24" fill="#e8f0fb" rx="3"/>
+  <rect x="40" y="267" width="714" height="12" fill="#e8f0fb"/>
+  <text x="52" y="271" class="sec">1. Temperature</text>
+
+  <!-- Normal (unchecked) -->
+  <rect x="60"  y="288" width="16" height="16" fill="#fff" stroke="#555" stroke-width="1.5"/>
+  <text x="82"  y="300" class="opt">Normal</text>
+  <rect x="126" y="285" width="34" height="13" fill="#dcfce7" stroke="#86efac" stroke-width="0.8" rx="2"/>
+  <text x="143" y="295" text-anchor="middle" class="sev-n">NORMAL</text>
+
+  <!-- Mild Fever (unchecked) -->
+  <rect x="200" y="288" width="16" height="16" fill="#fff" stroke="#555" stroke-width="1.5"/>
+  <text x="222" y="300" class="opt">Mild Fever</text>
+  <rect x="282" y="285" width="28" height="13" fill="#fefce8" stroke="#fde047" stroke-width="0.8" rx="2"/>
+  <text x="296" y="295" text-anchor="middle" class="sev-m">MILD</text>
+
+  <!-- High Fever (CHECKED) -->
+  <rect x="350" y="288" width="16" height="16" fill="#fff" stroke="#1a1a8a" stroke-width="2"/>
+  <text x="352" y="301" style="font: bold 14px Georgia, serif; fill: #1a1a8a;">✗</text>
+  <text x="373" y="300" class="opt" style="font: bold 11px 'Times New Roman', serif; fill:#1a1a8a;">High Fever</text>
+  <rect x="445" y="285" width="28" height="13" fill="#fee2e2" stroke="#fca5a5" stroke-width="0.8" rx="2"/>
+  <text x="459" y="295" text-anchor="middle" class="sev-h">HIGH</text>
+
+  <!-- ─────────────────────────────────────────── -->
+  <!-- SECTION 2: PAIN LEVEL -->
+  <!-- ─────────────────────────────────────────── -->
+  <rect x="40" y="345" width="714" height="78" fill="none" stroke="#bbb" stroke-width="1.5" rx="3"/>
+  <rect x="40" y="345" width="714" height="24" fill="#e8f0fb" rx="3"/>
+  <rect x="40" y="357" width="714" height="12" fill="#e8f0fb"/>
+  <text x="52" y="361" class="sec">2. Pain Level</text>
+
+  <!-- No Pain (unchecked) -->
+  <rect x="60"  y="378" width="16" height="16" fill="#fff" stroke="#555" stroke-width="1.5"/>
+  <text x="82"  y="390" class="opt">No Pain</text>
+  <rect x="138" y="375" width="34" height="13" fill="#dcfce7" stroke="#86efac" stroke-width="0.8" rx="2"/>
+  <text x="155" y="385" text-anchor="middle" class="sev-n">NORMAL</text>
+
+  <!-- Mild (unchecked) -->
+  <rect x="210" y="378" width="16" height="16" fill="#fff" stroke="#555" stroke-width="1.5"/>
+  <text x="232" y="390" class="opt">Mild</text>
+  <rect x="263" y="375" width="28" height="13" fill="#fefce8" stroke="#fde047" stroke-width="0.8" rx="2"/>
+  <text x="277" y="385" text-anchor="middle" class="sev-m">MILD</text>
+
+  <!-- Moderate (CHECKED) -->
+  <rect x="330" y="378" width="16" height="16" fill="#fff" stroke="#1a1a8a" stroke-width="2"/>
+  <text x="332" y="391" style="font: bold 14px Georgia, serif; fill: #1a1a8a;">✗</text>
+  <text x="353" y="390" class="opt" style="font: bold 11px 'Times New Roman', serif; fill:#1a1a8a;">Moderate</text>
+  <rect x="421" y="375" width="44" height="13" fill="#fefce8" stroke="#fde047" stroke-width="0.8" rx="2"/>
+  <text x="443" y="385" text-anchor="middle" class="sev-m">MODERATE</text>
+
+  <!-- Severe (unchecked) -->
+  <rect x="510" y="378" width="16" height="16" fill="#fff" stroke="#555" stroke-width="1.5"/>
+  <text x="532" y="390" class="opt">Severe</text>
+  <rect x="577" y="375" width="34" height="13" fill="#fee2e2" stroke="#fca5a5" stroke-width="0.8" rx="2"/>
+  <text x="594" y="385" text-anchor="middle" class="sev-h">SEVERE</text>
+
+  <!-- ─────────────────────────────────────────── -->
+  <!-- SECTION 3: BREATHING CONDITION -->
+  <!-- ─────────────────────────────────────────── -->
+  <rect x="40" y="435" width="714" height="78" fill="none" stroke="#bbb" stroke-width="1.5" rx="3"/>
+  <rect x="40" y="435" width="714" height="24" fill="#e8f0fb" rx="3"/>
+  <rect x="40" y="447" width="714" height="12" fill="#e8f0fb"/>
+  <text x="52" y="451" class="sec">3. Breathing Condition</text>
+
+  <!-- Normal (CHECKED) -->
+  <rect x="60"  y="468" width="16" height="16" fill="#fff" stroke="#1a1a8a" stroke-width="2"/>
+  <text x="62"  y="481" style="font: bold 14px Georgia, serif; fill: #1a1a8a;">✗</text>
+  <text x="83"  y="480" class="opt" style="font: bold 11px 'Times New Roman', serif; fill:#1a1a8a;">Normal</text>
+  <rect x="129" y="465" width="34" height="13" fill="#dcfce7" stroke="#86efac" stroke-width="0.8" rx="2"/>
+  <text x="146" y="475" text-anchor="middle" class="sev-n">NORMAL</text>
+
+  <!-- Slight Difficulty (unchecked) -->
+  <rect x="220" y="468" width="16" height="16" fill="#fff" stroke="#555" stroke-width="1.5"/>
+  <text x="242" y="480" class="opt">Slight Difficulty</text>
+  <rect x="337" y="465" width="28" height="13" fill="#fefce8" stroke="#fde047" stroke-width="0.8" rx="2"/>
+  <text x="351" y="475" text-anchor="middle" class="sev-m">MILD</text>
+
+  <!-- Severe Difficulty (unchecked) -->
+  <rect x="400" y="468" width="16" height="16" fill="#fff" stroke="#555" stroke-width="1.5"/>
+  <text x="422" y="480" class="opt">Severe Difficulty</text>
+  <rect x="524" y="465" width="34" height="13" fill="#fee2e2" stroke="#fca5a5" stroke-width="0.8" rx="2"/>
+  <text x="541" y="475" text-anchor="middle" class="sev-h">SEVERE</text>
+
+  <!-- ─────────────────────────────────────────── -->
+  <!-- SECTION 4: BLOOD PRESSURE -->
+  <!-- ─────────────────────────────────────────── -->
+  <rect x="40" y="525" width="714" height="78" fill="none" stroke="#bbb" stroke-width="1.5" rx="3"/>
+  <rect x="40" y="525" width="714" height="24" fill="#e8f0fb" rx="3"/>
+  <rect x="40" y="537" width="714" height="12" fill="#e8f0fb"/>
+  <text x="52" y="541" class="sec">4. Blood Pressure</text>
+
+  <!-- Normal (unchecked) -->
+  <rect x="60"  y="558" width="16" height="16" fill="#fff" stroke="#555" stroke-width="1.5"/>
+  <text x="82"  y="570" class="opt">Normal</text>
+  <rect x="128" y="555" width="34" height="13" fill="#dcfce7" stroke="#86efac" stroke-width="0.8" rx="2"/>
+  <text x="145" y="565" text-anchor="middle" class="sev-n">NORMAL</text>
+
+  <!-- Slightly Elevated (unchecked) -->
+  <rect x="210" y="558" width="16" height="16" fill="#fff" stroke="#555" stroke-width="1.5"/>
+  <text x="232" y="570" class="opt">Slightly Elevated</text>
+  <rect x="341" y="555" width="28" height="13" fill="#fefce8" stroke="#fde047" stroke-width="0.8" rx="2"/>
+  <text x="355" y="565" text-anchor="middle" class="sev-m">MILD</text>
+
+  <!-- High (CHECKED) -->
+  <rect x="400" y="558" width="16" height="16" fill="#fff" stroke="#1a1a8a" stroke-width="2"/>
+  <text x="402" y="571" style="font: bold 14px Georgia, serif; fill: #1a1a8a;">✗</text>
+  <text x="423" y="570" class="opt" style="font: bold 11px 'Times New Roman', serif; fill:#1a1a8a;">High</text>
+  <rect x="455" y="555" width="28" height="13" fill="#fee2e2" stroke="#fca5a5" stroke-width="0.8" rx="2"/>
+  <text x="469" y="565" text-anchor="middle" class="sev-h">HIGH</text>
+
+  <!-- ─────────────────────────────────────────── -->
+  <!-- SECTION 5: EMERGENCY INDICATOR -->
+  <!-- ─────────────────────────────────────────── -->
+  <rect x="40" y="615" width="714" height="78" fill="none" stroke="#bbb" stroke-width="1.5" rx="3"/>
+  <rect x="40" y="615" width="714" height="24" fill="#e8f0fb" rx="3"/>
+  <rect x="40" y="627" width="714" height="12" fill="#e8f0fb"/>
+  <text x="52" y="631" class="sec">5. Emergency Indicator</text>
+
+  <!-- None (CHECKED) -->
+  <rect x="60"  y="648" width="16" height="16" fill="#fff" stroke="#1a1a8a" stroke-width="2"/>
+  <text x="62"  y="661" style="font: bold 14px Georgia, serif; fill: #1a1a8a;">✗</text>
+  <text x="83"  y="660" class="opt" style="font: bold 11px 'Times New Roman', serif; fill:#1a1a8a;">None</text>
+  <rect x="115" y="645" width="34" height="13" fill="#dcfce7" stroke="#86efac" stroke-width="0.8" rx="2"/>
+  <text x="132" y="655" text-anchor="middle" class="sev-n">NORMAL</text>
+
+  <!-- Chest Pain (unchecked) -->
+  <rect x="200" y="648" width="16" height="16" fill="#fff" stroke="#555" stroke-width="1.5"/>
+  <text x="222" y="660" class="opt">Chest Pain</text>
+  <rect x="289" y="645" width="44" height="13" fill="#fee2e2" stroke="#fca5a5" stroke-width="0.8" rx="2"/>
+  <text x="311" y="655" text-anchor="middle" class="sev-h">EMERGENCY</text>
+
+  <!-- Breathing Difficulty (unchecked) -->
+  <rect x="380" y="648" width="16" height="16" fill="#fff" stroke="#555" stroke-width="1.5"/>
+  <text x="402" y="660" class="opt">Breathing Difficulty</text>
+  <rect x="519" y="645" width="44" height="13" fill="#fee2e2" stroke="#fca5a5" stroke-width="0.8" rx="2"/>
+  <text x="541" y="655" text-anchor="middle" class="sev-h">EMERGENCY</text>
+
+  <!-- ─────────────────────────────────────────── -->
+  <!-- CLINICAL NOTES + STAMP + SIGNATURE -->
+  <!-- ─────────────────────────────────────────── -->
+
+  <!-- Notes box -->
+  <rect x="40" y="710" width="450" height="100" fill="none" stroke="#bbb" stroke-width="1.5" rx="3"/>
+  <text x="52" y="726" class="flabel">Clinical Notes / Remarks</text>
+  <text x="52" y="745" class="note">Patient presents with persistent high fever</text>
+  <text x="52" y="760" class="note">since 2 days. BP elevated. Moderate body</text>
+  <text x="52" y="775" class="note">pain reported. No respiratory distress noted.</text>
+  <text x="52" y="790" class="note">Referred for lab investigation.</text>
+
+  <!-- Stamp (circle) -->
+  <circle cx="660" cy="755" r="52" fill="none" stroke="#c0392b" stroke-width="3"/>
+  <circle cx="660" cy="755" r="44" fill="none" stroke="#c0392b" stroke-width="1"/>
+  <text x="660" y="738" text-anchor="middle" class="stamp">RECEIVED</text>
+  <text x="660" y="752" text-anchor="middle" style="font: bold 20px Arial; fill:#c0392b;">✚</text>
+  <text x="660" y="765" text-anchor="middle" class="stamp">CITY GENERAL</text>
+  <text x="660" y="777" text-anchor="middle" class="stamp">HOSPITAL</text>
+  <text x="660" y="789" text-anchor="middle" class="stamp">21-03-2026</text>
+
+  <!-- Signature -->
+  <text x="52" y="840" class="sig">Dr. Priya Nair</text>
+  <line x1="40" y1="845" x2="400" y2="845" stroke="#333" stroke-width="1.2"/>
+  <text x="52" y="858" class="siglabel">Attending Physician Signature &amp; Designation</text>
+
+  <text x="420" y="840" class="hand">21/03/2026</text>
+  <line x1="420" y1="845" x2="754" y2="845" stroke="#333" stroke-width="1.2"/>
+  <text x="420" y="858" class="siglabel">Date</text>
+
+  <!-- ─────────────────────────────────────────── -->
+  <!-- FOOTER -->
+  <!-- ─────────────────────────────────────────── -->
+  <line x1="40" y1="880" x2="754" y2="880" stroke="#bbb" stroke-width="1"/>
+  <text x="50"  y="895" class="footer">Form HM-2024 — Patient Health Assessment</text>
+  <text x="397" y="895" text-anchor="middle" class="footer">City General Hospital — Confidential Patient Record</text>
+  <text x="754" y="895" text-anchor="end" class="footer">Page 1 of 1</text>
+
+  <!-- Bottom border accent -->
+  <rect x="0" y="1044" width="794" height="6" fill="#1a3a5c"/>
+</svg>

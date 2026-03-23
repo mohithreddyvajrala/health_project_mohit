@@ -1,0 +1,479 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>Sample Patient Health Form</title>
+  <style>
+    body {
+      font-family: "Times New Roman", serif;
+      background: #ccc;
+      display: flex;
+      justify-content: center;
+      padding: 30px;
+    }
+
+    .hint-bar {
+      position: fixed;
+      top: 0; left: 0; right: 0;
+      background: #1a3a5c;
+      color: #fff;
+      font-family: Arial, sans-serif;
+      font-size: 13px;
+      padding: 10px 20px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      z-index: 100;
+    }
+
+    .hint-bar button {
+      padding: 6px 16px;
+      background: #fff;
+      color: #1a3a5c;
+      border: none;
+      border-radius: 4px;
+      font-weight: 700;
+      cursor: pointer;
+    }
+
+    .paper {
+      background: #fff;
+      width: 720px;
+      padding: 40px 50px;
+      box-shadow: 0 4px 20px rgba(0,0,0,0.25);
+      margin-top: 50px;
+    }
+
+    /* Header */
+    .form-header {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      border-bottom: 3px solid #1a3a5c;
+      padding-bottom: 12px;
+      margin-bottom: 20px;
+    }
+
+    .hospital-name {
+      font-size: 18pt;
+      font-weight: bold;
+      color: #1a3a5c;
+    }
+
+    .hospital-sub {
+      font-size: 9pt;
+      color: #555;
+    }
+
+    .form-id-box {
+      border: 1.5px solid #1a3a5c;
+      padding: 8px 14px;
+      text-align: center;
+      font-size: 8pt;
+      color: #333;
+    }
+
+    .form-id-box strong {
+      display: block;
+      font-size: 13pt;
+      color: #1a3a5c;
+      letter-spacing: 2px;
+    }
+
+    .form-title {
+      text-align: center;
+      font-size: 14pt;
+      font-weight: bold;
+      letter-spacing: 1px;
+      text-transform: uppercase;
+      background: #1a3a5c;
+      color: #fff;
+      padding: 7px;
+      margin-bottom: 18px;
+    }
+
+    /* Patient info */
+    .patient-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr 1fr;
+      gap: 14px;
+      margin-bottom: 18px;
+    }
+
+    .field-group label {
+      display: block;
+      font-size: 8pt;
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+      color: #555;
+      margin-bottom: 3px;
+    }
+
+    .field-line {
+      border-bottom: 1.5px solid #333;
+      padding-bottom: 2px;
+      font-size: 11pt;
+      font-style: italic;
+      color: #1a1a1a;
+      min-height: 20px;
+    }
+
+    .handwritten {
+      font-family: "Comic Sans MS", "Segoe Script", cursive;
+      font-size: 12pt;
+      color: #1a1a8a;
+    }
+
+    /* Section */
+    .section {
+      border: 1.5px solid #bbb;
+      border-radius: 4px;
+      margin-bottom: 14px;
+      overflow: hidden;
+    }
+
+    .section-title {
+      background: #e8f0fb;
+      border-bottom: 1.5px solid #bbb;
+      padding: 5px 12px;
+      font-size: 10pt;
+      font-weight: bold;
+      color: #1a3a5c;
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+    }
+
+    .options-row {
+      display: flex;
+      padding: 10px 12px;
+      gap: 28px;
+      flex-wrap: wrap;
+    }
+
+    .option {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      font-size: 10.5pt;
+    }
+
+    /* Checkbox styles */
+    .box {
+      width: 18px;
+      height: 18px;
+      border: 2px solid #333;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      flex-shrink: 0;
+      background: #fff;
+    }
+
+    .box.checked {
+      border-color: #1a1a8a;
+    }
+
+    .box.checked::after {
+      content: "✗";
+      font-size: 14px;
+      color: #1a1a8a;
+      font-weight: bold;
+      font-family: "Comic Sans MS", cursive;
+      line-height: 1;
+    }
+
+    /* Severity badges on form */
+    .sev {
+      font-size: 7.5pt;
+      padding: 1px 6px;
+      border-radius: 3px;
+      font-weight: bold;
+      text-transform: uppercase;
+      letter-spacing: 0.04em;
+      margin-left: 4px;
+    }
+    .sev-normal   { background: #dcfce7; color: #166534; border: 1px solid #86efac; }
+    .sev-mild     { background: #fefce8; color: #854d0e; border: 1px solid #fde047; }
+    .sev-high     { background: #fee2e2; color: #991b1b; border: 1px solid #fca5a5; }
+    .sev-emerg    { background: #fee2e2; color: #991b1b; border: 1px solid #fca5a5; }
+
+    /* Signature / notes */
+    .bottom-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 20px;
+      margin-top: 16px;
+    }
+
+    .notes-box {
+      border: 1.5px solid #bbb;
+      border-radius: 4px;
+      padding: 8px 12px;
+      min-height: 70px;
+      font-size: 9pt;
+    }
+
+    .notes-box .notes-label {
+      font-size: 8pt;
+      font-weight: bold;
+      text-transform: uppercase;
+      color: #555;
+      margin-bottom: 4px;
+    }
+
+    .notes-text {
+      font-family: "Comic Sans MS", cursive;
+      font-size: 10pt;
+      color: #1a1a8a;
+      line-height: 1.6;
+    }
+
+    .sig-line {
+      border-bottom: 1.5px solid #333;
+      margin-top: 32px;
+      position: relative;
+    }
+
+    .sig-line .sig-name {
+      font-family: "Comic Sans MS", cursive;
+      font-size: 13pt;
+      color: #1a1a8a;
+      position: absolute;
+      bottom: 2px;
+      left: 0;
+    }
+
+    .sig-label {
+      font-size: 8pt;
+      color: #555;
+      margin-top: 3px;
+      text-transform: uppercase;
+    }
+
+    /* Stamp */
+    .stamp {
+      border: 3px solid #c0392b;
+      border-radius: 50%;
+      width: 90px;
+      height: 90px;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      text-align: center;
+      color: #c0392b;
+      font-size: 7.5pt;
+      font-weight: bold;
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+      transform: rotate(-15deg);
+      margin: 0 auto;
+      line-height: 1.4;
+    }
+
+    .form-footer {
+      border-top: 1px solid #bbb;
+      margin-top: 18px;
+      padding-top: 8px;
+      font-size: 7.5pt;
+      color: #777;
+      display: flex;
+      justify-content: space-between;
+    }
+
+    @media print {
+      body { background: #fff; padding: 0; }
+      .hint-bar { display: none; }
+      .paper { box-shadow: none; margin: 0; width: 100%; padding: 20px 30px; }
+    }
+  </style>
+</head>
+<body>
+
+<div class="hint-bar">
+  <span>Sample Paper Form &mdash; Take a screenshot or print, then upload to the Scan page</span>
+  <button onclick="window.print()">&#128438; Print / Save as PDF</button>
+</div>
+
+<div class="paper">
+
+  <!-- Header -->
+  <div class="form-header">
+    <div>
+      <div class="hospital-name">&#10010; City General Hospital</div>
+      <div class="hospital-sub">Department of Emergency &amp; Outpatient Services</div>
+      <div class="hospital-sub">123 Medical Drive, New Delhi &mdash; 110001</div>
+    </div>
+    <div class="form-id-box">
+      FORM NO.<br>
+      <strong>HM-2024</strong>
+      Date: 21/03/2026
+    </div>
+  </div>
+
+  <div class="form-title">Patient Health Assessment Form</div>
+
+  <!-- Patient Info -->
+  <div class="patient-grid">
+    <div class="field-group">
+      <label>Patient Name</label>
+      <div class="field-line"><span class="handwritten">Rahul Sharma</span></div>
+    </div>
+    <div class="field-group">
+      <label>Age / Gender</label>
+      <div class="field-line"><span class="handwritten">34 / Male</span></div>
+    </div>
+    <div class="field-group">
+      <label>Patient ID</label>
+      <div class="field-line"><span class="handwritten">PT-00847</span></div>
+    </div>
+    <div class="field-group">
+      <label>Date of Visit</label>
+      <div class="field-line"><span class="handwritten">21-03-2026</span></div>
+    </div>
+    <div class="field-group">
+      <label>Attending Staff</label>
+      <div class="field-line"><span class="handwritten">Dr. Priya Nair</span></div>
+    </div>
+    <div class="field-group">
+      <label>Ward / OPD</label>
+      <div class="field-line"><span class="handwritten">OPD-3</span></div>
+    </div>
+  </div>
+
+  <!-- Instructions -->
+  <p style="font-size:8.5pt; color:#555; margin-bottom:12px; font-style:italic;">
+    Instructions: Mark the applicable box with an <strong>X</strong> for each parameter. Select only ONE option per section.
+  </p>
+
+  <!-- Temperature -->
+  <div class="section">
+    <div class="section-title">1. Temperature</div>
+    <div class="options-row">
+      <div class="option">
+        <div class="box"></div>
+        <span>Normal <span class="sev sev-normal">Normal</span></span>
+      </div>
+      <div class="option">
+        <div class="box"></div>
+        <span>Mild Fever <span class="sev sev-mild">Mild</span></span>
+      </div>
+      <div class="option">
+        <div class="box checked"></div>
+        <span><strong>High Fever</strong> <span class="sev sev-high">High</span></span>
+      </div>
+    </div>
+  </div>
+
+  <!-- Pain Level -->
+  <div class="section">
+    <div class="section-title">2. Pain Level</div>
+    <div class="options-row">
+      <div class="option">
+        <div class="box"></div>
+        <span>No Pain <span class="sev sev-normal">Normal</span></span>
+      </div>
+      <div class="option">
+        <div class="box"></div>
+        <span>Mild <span class="sev sev-mild">Mild</span></span>
+      </div>
+      <div class="option">
+        <div class="box checked"></div>
+        <span><strong>Moderate</strong> <span class="sev sev-mild">Moderate</span></span>
+      </div>
+      <div class="option">
+        <div class="box"></div>
+        <span>Severe <span class="sev sev-high">Severe</span></span>
+      </div>
+    </div>
+  </div>
+
+  <!-- Breathing -->
+  <div class="section">
+    <div class="section-title">3. Breathing Condition</div>
+    <div class="options-row">
+      <div class="option">
+        <div class="box checked"></div>
+        <span><strong>Normal</strong> <span class="sev sev-normal">Normal</span></span>
+      </div>
+      <div class="option">
+        <div class="box"></div>
+        <span>Slight Difficulty <span class="sev sev-mild">Mild</span></span>
+      </div>
+      <div class="option">
+        <div class="box"></div>
+        <span>Severe Difficulty <span class="sev sev-high">Severe</span></span>
+      </div>
+    </div>
+  </div>
+
+  <!-- Blood Pressure -->
+  <div class="section">
+    <div class="section-title">4. Blood Pressure</div>
+    <div class="options-row">
+      <div class="option">
+        <div class="box"></div>
+        <span>Normal <span class="sev sev-normal">Normal</span></span>
+      </div>
+      <div class="option">
+        <div class="box"></div>
+        <span>Slightly Elevated <span class="sev sev-mild">Mild</span></span>
+      </div>
+      <div class="option">
+        <div class="box checked"></div>
+        <span><strong>High</strong> <span class="sev sev-high">High</span></span>
+      </div>
+    </div>
+  </div>
+
+  <!-- Emergency -->
+  <div class="section">
+    <div class="section-title">5. Emergency Indicator</div>
+    <div class="options-row">
+      <div class="option">
+        <div class="box checked"></div>
+        <span><strong>None</strong> <span class="sev sev-normal">None</span></span>
+      </div>
+      <div class="option">
+        <div class="box"></div>
+        <span>Chest Pain <span class="sev sev-emerg">Emergency</span></span>
+      </div>
+      <div class="option">
+        <div class="box"></div>
+        <span>Breathing Difficulty <span class="sev sev-emerg">Emergency</span></span>
+      </div>
+    </div>
+  </div>
+
+  <!-- Bottom: Notes + Signature + Stamp -->
+  <div class="bottom-grid">
+    <div>
+      <div class="notes-box">
+        <div class="notes-label">Clinical Notes / Remarks</div>
+        <div class="notes-text">Patient presents with persistent high fever<br>since 2 days. BP elevated. Moderate body pain.<br>No respiratory distress observed.</div>
+      </div>
+    </div>
+    <div style="display:flex; flex-direction:column; justify-content:space-between;">
+      <div class="stamp">
+        Received<br>&#10010;<br>City General<br>Hospital<br>21-03-2026
+      </div>
+    </div>
+  </div>
+
+  <div style="margin-top:20px;">
+    <div class="sig-line">
+      <span class="sig-name">Dr. Priya Nair</span>
+    </div>
+    <div class="sig-label">Attending Physician Signature</div>
+  </div>
+
+  <div class="form-footer">
+    <span>Form HM-2024 &mdash; Health Monitoring Assessment</span>
+    <span>City General Hospital &mdash; Confidential Patient Record</span>
+    <span>Page 1 of 1</span>
+  </div>
+
+</div>
+
+</body>
+</html>
